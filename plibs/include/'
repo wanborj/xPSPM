@@ -34,32 +34,28 @@ struct mode;
 struct condition;
 struct condition_array;
 struct mode_array;
-struct work;
 
 typedef struct message *  ps_message_t;
 typedef struct servant * ps_servant_t;
-typedef struct work * prv_work_t;
 typedef struct ptask * ps_task_t;
 typedef struct mode * ps_mode_t;
 typedef struct condition * ps_mode_condition_t;
 typedef struct condition_array * ps_condition_array_t;
 typedef struct mode_array * ps_mode_array_t;
 
-
-struct work{
-	void * data; // the input event
-	void (*runnable)(void *);
-};  // the entity of workqueue
-
 struct servant{
 	prv_id_t		sid;
 	prv_stype_t		type; // 0 for sensor; 1 for controller; 2 for actuator
     prv_tick_t		wcet;
 	prv_id_t		tid;
-	void (*runnable)();
 	prv_hashtable_t *inbox;
 };
 
+struct work{
+	prv_id_t sid; // the id of the Servant
+	void (*runnable)(); // runnable
+
+}
 
 struct message{
 	ps_servant_t	source;

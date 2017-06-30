@@ -28459,6 +28459,7 @@ __WFE	libraries/CMSIS/CM3/CoreSupport/core_cm3.h	770;"	d
 __WFI	libraries/CMSIS/CM3/CoreSupport/core_cm3.h	/^static __INLINE  void __WFI()                     { __ASM ("wfi"); }$/;"	f
 __WFI	libraries/CMSIS/CM3/CoreSupport/core_cm3.h	/^static __INLINE void __WFI()                      { __ASM volatile ("wfi"); }$/;"	f
 __WFI	libraries/CMSIS/CM3/CoreSupport/core_cm3.h	769;"	d
+__WORKQUEUE_H_	plibs/include/workqueue.h	2;"	d
 ___interrupt_27	libraries/FreeRTOS/portable/IAR/RX600/port_asm.s	/^___interrupt_27:$/;"	l
 __cs3_isr_interrupt_80	libraries/FreeRTOS/portable/GCC/ColdFire_V2/portasm.S	/^__cs3_isr_interrupt_80:$/;"	l
 __disable_fault_irq	libraries/CMSIS/CM3/CoreSupport/core_cm3.h	/^static __INLINE void __disable_fault_irq()        { __ASM ("cpsid f"); }$/;"	f
@@ -28616,6 +28617,7 @@ abs	libraries/FreeRTOS/portable/IAR/STR91x/port.c	100;"	d	file:
 actuator1	apps/app.c	/^void actuator1(void * para)$/;"	f
 actuator2	apps/app.c	/^void actuator2(void * para)$/;"	f
 alt_irq_register	libraries/FreeRTOS/portable/GCC/NiosII/port.c	/^int alt_irq_register( alt_u32 id, void* context, void (*handler)(void*, alt_u32) )$/;"	f
+aperiodic	apps/app.c	/^void aperiodic()$/;"	f
 assert_param	apps/stm32f10x_conf.h	68;"	d
 assert_param	apps/stm32f10x_conf.h	72;"	d
 bool	plibs/include/PSPMconfigure.h	/^typedef int		bool;$/;"	t
@@ -28695,6 +28697,7 @@ current_servant	plibs/ef.c	/^static ps_servant_t current_servant;$/;"	v	file:
 dDummy	libraries/FreeRTOS/portable/MemMang/heap_1.c	/^		volatile portDOUBLE dDummy;$/;"	m	union:xRTOS_HEAP	file:
 dDummy	libraries/FreeRTOS/portable/MemMang/heap_2.c	/^		volatile portDOUBLE dDummy;$/;"	m	union:xRTOS_HEAP	file:
 data	plibs/include/PSPMconfigure.h	/^	int data;$/;"	m	struct:message
+data	plibs/workqueue.c	/^	void * data; \/\/ the input event$/;"	m	struct:work	file:
 deadline	plibs/include/PSPMconfigure.h	/^    prv_tick_t		deadline;$/;"	m	struct:ptask
 definitions	libraries/FreeRTOS/portable/IAR/AtmelSAM7S64/ISR_Support.h	/^; Context save and restore macro definitions$/;"	v
 definitions	libraries/FreeRTOS/portable/IAR/AtmelSAM9XE/ISR_Support.h	/^; Context save and restore macro definitions$/;"	v
@@ -28796,7 +28799,7 @@ lp	libraries/FreeRTOS/portable/IAR/V850ES/ISR_Support.h	/^    ld.w    4[sp],lp		
 lp	libraries/FreeRTOS/portable/IAR/V850ES/ISR_Support.h	/^    ld.w    8[sp],lp						; restore LP from stack$/;"	v
 lp	libraries/FreeRTOS/portable/IAR/V850ES/ISR_Support.h	/^    ldsr    lp,0$/;"	v
 lp	libraries/FreeRTOS/portable/IAR/V850ES/ISR_Support.h	/^    ldsr    lp,1$/;"	v
-m2s	plibs/include/PSPMconfigure.h	119;"	d
+m2s	plibs/include/PSPMconfigure.h	121;"	d
 main	main.c	/^int main()$/;"	f
 marray	plibs/mode.c	/^struct mode_array marray;$/;"	v	typeref:struct:mode_array
 mcf5xxx_wr_cacr	libraries/FreeRTOS/portable/GCC/ColdFire_V2/portasm.S	/^mcf5xxx_wr_cacr:$/;"	l
@@ -31179,17 +31182,18 @@ portYIELD_FROM_ISR	libraries/FreeRTOS/portable/Softune/MB96340/portmacro.h	139;"
 portYIELD_TRAP_NO	libraries/FreeRTOS/portable/Renesas/SH2A_FPU/portmacro.h	112;"	d
 portYIELD_WITHIN_API	libraries/FreeRTOS/include/FreeRTOS.h	506;"	d
 portYIELD_WITHIN_API	libraries/FreeRTOS/portable/GCC/ARM_CM3_MPU/portmacro.h	152;"	d
-port_free	plibs/include/PSPMport.h	35;"	d
-port_get_current_time	plibs/include/PSPMport.h	29;"	d
-port_malloc	plibs/include/PSPMport.h	33;"	d
-port_print	plibs/include/PSPMport.h	38;"	d
-port_scheduler_start	plibs/include/PSPMport.h	40;"	d
-port_semph_create	plibs/include/PSPMport.h	24;"	d
-port_semph_t	plibs/include/PSPMport.h	25;"	d
+port_free	plibs/include/PSPMport.h	37;"	d
+port_get_current_time	plibs/include/PSPMport.h	31;"	d
+port_malloc	plibs/include/PSPMport.h	35;"	d
+port_print	plibs/include/PSPMport.h	40;"	d
+port_scheduler_start	plibs/include/PSPMport.h	42;"	d
+port_semph_create	plibs/include/PSPMport.h	26;"	d
+port_semph_t	plibs/include/PSPMport.h	27;"	d
 port_servant_create	plibs/include/PSPMport.h	14;"	d
-port_servant_yield	plibs/include/PSPMport.h	17;"	d
-port_trigger	plibs/include/PSPMport.h	22;"	d
-port_wait	plibs/include/PSPMport.h	21;"	d
+port_servant_yield	plibs/include/PSPMport.h	19;"	d
+port_trigger	plibs/include/PSPMport.h	24;"	d
+port_wait	plibs/include/PSPMport.h	23;"	d
+port_workprocess_create	plibs/include/PSPMport.h	16;"	d
 portexASM_HANDLER_STACK_FRAME_SIZE	libraries/FreeRTOS/portable/GCC/MicroBlazeV8/port_exceptions.c	96;"	d	file:
 portexINSTRUCTION_SIZE	libraries/FreeRTOS/portable/GCC/MicroBlazeV8/port_exceptions.c	99;"	d	file:
 portexMSR_STACK_OFFSET	libraries/FreeRTOS/portable/GCC/MicroBlazeV8/port_exceptions.c	90;"	d	file:
@@ -31441,6 +31445,12 @@ prv_task_get_period	plibs/include/ptask.h	22;"	d
 prv_task_get_servant_num	plibs/include/ptask.h	24;"	d
 prv_tick_t	plibs/include/PSPMconfigure.h	/^typedef long	prv_tick_t;$/;"	t
 prv_time_trigger	plibs/PSPMconfigure.c	/^void prv_time_trigger()$/;"	f
+prv_work_add	plibs/workqueue.c	/^void prv_work_add(prv_id_t sid, void * data)$/;"	f
+prv_work_initialize	plibs/workqueue.c	/^void prv_work_initialize()$/;"	f
+prv_work_is_null	plibs/workqueue.c	/^int prv_work_is_null()$/;"	f
+prv_work_pop	plibs/workqueue.c	/^prv_work_t prv_work_pop()$/;"	f
+prv_work_t	plibs/workqueue.c	/^typedef struct work * prv_work_t;$/;"	t	typeref:struct:work	file:
+prv_work_trigger	plibs/workqueue.c	/^void prv_work_trigger()$/;"	f
 ps_condition_array_t	plibs/include/PSPMconfigure.h	/^typedef struct condition_array * ps_condition_array_t;$/;"	t	typeref:struct:condition_array
 ps_duration_set_input	plibs/PSPMconfigure.c	/^void ps_duration_set_input(prv_tick_t t)$/;"	f
 ps_duration_set_output	plibs/PSPMconfigure.c	/^void ps_duration_set_output(prv_tick_t t)$/;"	f
@@ -31637,6 +31647,8 @@ relations	plibs/ef.c	/^prv_relation_t relations[NUMOFSERVANTS];$/;"	v
 release	plibs/ef.c	/^	prv_tick_t release;$/;"	m	struct:node	file:
 restore_context	libraries/FreeRTOS/portable/GCC/NiosII/port_asm.S	/^restore_context:$/;"	l
 restore_sp_from_pxCurrentTCB	libraries/FreeRTOS/portable/GCC/NiosII/port_asm.S	/^restore_sp_from_pxCurrentTCB:$/;"	l
+runnable	plibs/include/PSPMconfigure.h	/^	void (*runnable)();$/;"	m	struct:servant
+runnable	plibs/workqueue.c	/^	void (*runnable)(void *);$/;"	m	struct:work	file:
 s16	libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h	/^typedef int16_t s16;$/;"	t
 s32	libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h	/^typedef int32_t  s32;$/;"	t
 s5	libraries/FreeRTOS/portable/MPLAB/PIC32MX/ISR_Support.h	/^	add			s5, zero, sp$/;"	v
@@ -31682,6 +31694,7 @@ schedule_node	plibs/ef.c	/^typedef struct node * schedule_node;$/;"	t	typeref:st
 scheduler	libraries/FreeRTOS/portable/IAR/78K0R/ISR_Support.h	/^; Variables used by scheduler$/;"	v
 scheduler	libraries/FreeRTOS/portable/IAR/RL78/ISR_Support.h	/^; Variables used by scheduler$/;"	v
 sem	plibs/servant.c	/^port_semph_t sem[NUMOFSERVANTS];$/;"	v
+sem	plibs/workqueue.c	/^port_semph_t sem; \/\/  the semaphore for trigging work thread$/;"	v
 semBINARY_SEMAPHORE_QUEUE_LENGTH	libraries/FreeRTOS/include/semphr.h	78;"	d
 semGIVE_BLOCK_TIME	libraries/FreeRTOS/include/semphr.h	80;"	d
 semSEMAPHORE_QUEUE_ITEM_LENGTH	libraries/FreeRTOS/include/semphr.h	79;"	d
@@ -32401,6 +32414,9 @@ vuint16	libraries/FreeRTOS/portable/GCC/MCF5235/port.c	/^typedef volatile unsign
 vuint32	libraries/FreeRTOS/portable/GCC/MCF5235/port.c	/^typedef volatile unsigned long vuint32;$/;"	t	file:
 vuint8	libraries/FreeRTOS/portable/GCC/MCF5235/port.c	/^typedef volatile unsigned char vuint8;$/;"	t	file:
 wcet	plibs/include/PSPMconfigure.h	/^    prv_tick_t		wcet;$/;"	m	struct:servant
+work	plibs/workqueue.c	/^struct work{$/;"	s	file:
+workqueue	plibs/workqueue.c	/^prv_list_t workqueue; \/\/ the ready list of aperiodic Servant$/;"	v
+workthread	plibs/workqueue.c	/^static void workthread()$/;"	f	file:
 x0C	libraries/FreeRTOS/portable/IAR/V850ES/ISR_Support.h	/^    add     0x0C,sp							; set SP to right position$/;"	v
 x0E	libraries/FreeRTOS/portable/Softune/MB91460/port.c	/^	BANDL #0x0E, @R0						;Clear Delayed interrupt flag$/;"	v
 x10	libraries/FreeRTOS/portable/Softune/MB91460/port.c	/^	ORCCR #0x10								;Re-enable Interrupts$/;"	v

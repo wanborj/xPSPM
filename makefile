@@ -58,6 +58,7 @@ main.bin: main.c
 		$(PSEFM_LIB)/modeltime.c \
 		$(PSEFM_LIB)/PSPMconfigure.c \
 		$(PSEFM_LIB)/hashtable.c \
+		$(PSEFM_LIB)/workqueue.c \
 		\
 		$(PSEFM_APP)/app.c \
 		$(PSEFM_APP)/stm32_p103.c \

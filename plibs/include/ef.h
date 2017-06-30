@@ -41,17 +41,7 @@ ps_servant_t prv_ef_get_current_servant();
 void         prv_ef_set_current_servant(ps_servant_t s);
 
 
-/******************************************************
-unction: prv_ef_triggering
-Description: kernel function, trigger the servant
-calls:
-Called by:
-Input:
-Output:
-Return:
-Others:
- * *****************************************************/
-void prv_ef_triggering();
+
 
 /******************************************************
 Function: prv_ef_create
@@ -65,8 +55,20 @@ Others:
  * *****************************************************/
 void prv_ef_create();
 
+int prv_ef_is_latest_release();
 
-int prv_ef_is_time_to_trigger();
-int prv_ef_coroutine_trigger();
+int prv_ef_is_next_release();
+
+/******************************************************
+unction: prv_ef_triggering
+Description: kernel function, trigger the servant
+calls:
+Called by:
+Input:
+Output:
+Return:
+Others:
+ * *****************************************************/
+void prv_ef_triggering();
 
 #endif

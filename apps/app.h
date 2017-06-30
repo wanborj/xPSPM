@@ -18,4 +18,4 @@ void actuator2(void *);
 
 bool mode_switch1();
 
-
+void aperiodic();

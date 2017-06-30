@@ -10,14 +10,16 @@
 // 0, complete deterministic mode
 // otherwise, support C-Servants execute advance for power saving
 #define configUSE_OPTIMIZATION  1
-// servant operation
+// servant creation
 #define port_servant_create(runnable, para, prio) xTaskCreate(runnable, NULL, 128, para, prio, NULL)
+// work process creation for processing aperiodic Servants
+#define port_workprocess_create(runnable, para, prio) xTaskCreate(runnable, NULL, 128, para, prio, NULL)
 
 // trigger R_Servant to run
 #define port_servant_yield() taskYIELD()
 
 
-// event operation
+// semaphore operation
 #define port_wait(e)   xSemaphoreTake( e, portMAX_DELAY)
 #define port_trigger(e) xSemaphoreGive( e )
 // create semaphore and take the token away

@@ -3,6 +3,7 @@
 /home/wanbo/workspace/xPSPM-C/plibs/ptask.c
 /home/wanbo/workspace/xPSPM-C/plibs/PSPMconfigure.c
 /home/wanbo/workspace/xPSPM-C/plibs/servant.c
+/home/wanbo/workspace/xPSPM-C/plibs/workqueue.c
 /home/wanbo/workspace/xPSPM-C/plibs/modeltime.c
 /home/wanbo/workspace/xPSPM-C/plibs/hashtable.c
 /home/wanbo/workspace/xPSPM-C/plibs/list_internal.c
@@ -12,6 +13,7 @@
 /home/wanbo/workspace/xPSPM-C/plibs/include/servant.h
 /home/wanbo/workspace/xPSPM-C/plibs/include/PSPMconfigure.h
 /home/wanbo/workspace/xPSPM-C/plibs/include/event.h
+/home/wanbo/workspace/xPSPM-C/plibs/include/workqueue.h
 /home/wanbo/workspace/xPSPM-C/plibs/include/PSPMport.h
 /home/wanbo/workspace/xPSPM-C/plibs/include/mode.h
 /home/wanbo/workspace/xPSPM-C/plibs/include/list_internal.h

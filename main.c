@@ -5,7 +5,7 @@
 
 int main()
 {
-	ps_servant_t ps_servants[8];
+	ps_servant_t ps_servants[20];
 	ps_task_t ps_tasks[2];
 
 	// the duration of input phase and output phase of a Unit
@@ -25,6 +25,7 @@ int main()
 	ps_servants[6] = ps_servant_create(6, 1, 1500, 1, ps_servants+5, controller22);
 	ps_servants[7] = ps_servant_create(7, 2, 100, 1, ps_servants+6, actuator2);
 
+	ps_servants[8] = ps_servant_create(8, 3, 0, 0, NULL, aperiodic);
 
 	/* parameters: task_id, LET, servant_num, servant_array[]*/
 	ps_tasks[0] = ps_task_create(0, 5000, 4, ps_servants);

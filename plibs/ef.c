@@ -287,35 +287,31 @@ static void prv_STT_create(ps_mode_t m)
 	}
 }
 
-// fixed time slot
-#if (configUSE_OPTIMIZATION==0)
 
-int prv_ef_is_time_to_trigger()
+// called in Tick interrupt handler, whether there is a Servant must be released
+int prv_ef_is_latest_release()
 {
 	ps_mode_t current_mode = prv_mode_get_current_mode();
 	prv_item_t * current_item = prv_list_get_current_item(&STT[current_mode->mid]);
 	schedule_node n = (schedule_node)current_item->entity;
 	prv_tick_t current_time = port_get_current_time();
 
-	if(current_time >= n->release + prv_mode_get_modestart()){
-		// set the n->servant as current Servant
+	if(n->release + prv_mode_get_modestart() <= current_time){
 		prv_ef_set_current_servant(n->servant);
-
-		// point to the next iterator of the STT
 		prv_list_set_current_item(&STT[current_mode->mid]);
 		if(current_item == STT[current_mode->mid].last){
 			prv_mode_set_modestart(prv_mode_get_modestart() + current_mode->period);
 		}
+
 		return 1;
 	}else{
 		return 0;
 	}
+
 }
 
-#else
-// advance execution of C-Servants
-
-int prv_ef_is_time_to_trigger()
+// called in idle handler, if no aperiodic event occurs, subsequent Servant is released
+int prv_ef_is_next_release()
 {
 	ps_mode_t current_mode = prv_mode_get_current_mode();
 	prv_item_t * current_item = prv_list_get_current_item(&STT[current_mode->mid]);
@@ -323,13 +319,28 @@ int prv_ef_is_time_to_trigger()
 	prv_tick_t current_time = port_get_current_time();
 
 	// cope with I-Servant and O-Servant
-	if(prv_servant_get_type(n->servant) != 1){
-		if(current_time >= n->release + prv_mode_get_modestart()){
+	if(prv_servant_get_type(n->servant) == 0){
+		if(current_time >= prv_mode_get_modestart()){
+			/* we assume it never happenes
+			if(current_time > prv_mode_get_modestart() + prv_duration_get_input()){
+				port_print("Deadline Missing in D_I\n\r");
+			}
+			*/
 			// set the n->servant as current Servant
 			prv_ef_set_current_servant(n->servant);
 
 			// point to the next iterator of the STT
 			prv_list_set_current_item(&STT[current_mode->mid]);
+
+			return 1;
+		}else{
+			return 0;
+		}
+	}else if(prv_servant_get_type(n->servant) == 2){
+		if(current_time >= prv_mode_get_modestart() + prv_mode_get_period(current_mode)){
+			prv_ef_set_current_servant(n->servant);
+			prv_list_set_current_item(&STT[current_mode->mid]);
+
 			if(current_item == STT[current_mode->mid].last){
 				prv_mode_set_modestart(prv_mode_get_modestart() + current_mode->period);
 			}
@@ -349,8 +360,6 @@ int prv_ef_is_time_to_trigger()
 		}
 	}
 }
-
-#endif
 
 void prv_ef_triggering()
 {

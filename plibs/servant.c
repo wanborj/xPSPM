@@ -17,31 +17,32 @@ ps_servant_t ps_servant_create(   prv_id_t sid,
 {
     int i;
 	char ch[10];
-	ps_message_t message[num];
 	servants[sid] = (ps_servant_t)port_malloc(sizeof(struct servant));
-    ps_servant_t s = servants[sid];
-	port_semph_create ( sem[sid] );
-	prv_hashtable_t * ht = prv_hashtable_new();  // memory allocated in heap
+	ps_servant_t s = servants[sid];
 
-	s->sid  = sid;
-    s->type = type;
-    s->wcet = wcet;
-	s->inbox = ht;
+	if(type != 3){
+		port_semph_create ( sem[sid] );
+		prv_hashtable_t * ht = prv_hashtable_new();  // memory allocated in heap
 
-    port_servant_create(runnable, &s->sid, 2);
+		s->sid  = sid;
+		s->type = type;
+		s->wcet = wcet;
+		s->inbox = ht;
+		s->runnable = runnable;
 
-    for(i = 0; i < num; ++ i){
-		prv_ef_add_relation(src_array[i], s);   // construct topological graph
-		message[i] = port_malloc(sizeof(struct message));   // init the inbox of each servant
-		message[i]->data = 0;
-		message[i]->source = src_array[i];
-		message[i]->destination = s;
-		itoa(src_array[i]->sid, ch);
-		//if(-1 == prv_hashtable_add(ht, ch, message[i]))   // the inbox is a hashtable
-		//{
-		//	port_print("memory allocate failed\n");
-		//}
-    }
+		port_servant_create(runnable, &s->sid, 2);
+
+		for(i = 0; i < num; ++ i){
+			prv_ef_add_relation(src_array[i], s);   // construct topological graph
+		}
+	}else{
+		// aperiodic tasks stored in work queue
+		s->sid = sid;
+		s->type = type;
+		s->wcet = 0;
+		s->inbox = NULL;
+		s->runnable = runnable;
+	}
 
 	return s;
 }

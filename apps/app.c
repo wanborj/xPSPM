@@ -113,4 +113,7 @@ bool mode_switch1()
 	return 1;
 }
 
-
+void aperiodic()
+{
+	port_print("aperiodic\n\r");
+}

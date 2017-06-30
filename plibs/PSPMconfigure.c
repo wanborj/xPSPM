@@ -1,5 +1,6 @@
 #include "PSPMconfigure.h"
 #include "PSPMport.h"
+#include "workqueue.h"
 #include "mode.h"
 
 static prv_tick_t INPUT;
@@ -12,7 +13,8 @@ void prv_time_trigger()
 		prv_mode_switch();
 	}
 
-	if(prv_ef_is_time_to_trigger() == 1){
+	// 1 measn TT exists, 0 mean no TT
+	if((prv_ef_is_latest_release()) == 1){
 		prv_ef_triggering();
 	}
 }
@@ -27,6 +29,7 @@ void myHardwareInit(){
 void system_start()
 {
     myHardwareInit();
+	prv_work_initialize();
     prv_ef_create();
 	prv_mode_switch();
     port_scheduler_start();
@@ -68,6 +71,14 @@ void vApplicationTickHook( void )
 
 void vApplicationIdleHook()
 {
+	if( 0 == prv_work_is_null()){
+		// there are aperiodic events, so trigger the aperiodic server
+		prv_work_triggering();
+	}else{
+		if(prv_ef_is_next_release() == 1){
+			prv_ef_triggering();
+		}
+	}
 }
 
 //#define offsetof(s, m)   (char *)&(((s *)0)->m)
